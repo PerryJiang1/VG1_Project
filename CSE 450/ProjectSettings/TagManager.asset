@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Portal
+  - Ground
+  - Mirror
   layers:
   - Default
   - TransparentFX
@@ -11,10 +14,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Portal
+  - Background
+  - Player
+  - Mirror
   - 
   - 
   - 
@@ -40,4 +43,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2070833179
+    locked: 0
+  - name: Game Componenets
+    uniqueID: 578283585
     locked: 0
