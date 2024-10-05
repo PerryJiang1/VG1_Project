@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 496982061}
   - component: {fileID: 496982060}
   - component: {fileID: 496982059}
+  - component: {fileID: 496982064}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -385,6 +386,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &496982064
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496982058}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &802144110
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +429,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109de19d212a15d47800aca70d47cd88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startButton: {fileID: 0}
+  startButton: {fileID: 1866461425}
+  canvasGroup: {fileID: 0}
+  fadeDuration: 1
+  nextSceneName: Level1
 --- !u!4 &802144112
 Transform:
   m_ObjectHideFlags: 0
@@ -741,6 +757,7 @@ GameObject:
   - component: {fileID: 1866461426}
   - component: {fileID: 1866461425}
   - component: {fileID: 1866461428}
+  - component: {fileID: 1866461429}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -863,6 +880,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startButton: {fileID: 1866461425}
+  canvasGroup: {fileID: 496982064}
+  fadeDuration: 1
+  nextSceneName: Level1
+--- !u!114 &1866461429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866461423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e49e0ff337ddc4191c04d36dbd1c1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: fb0f97f5c6e274f488e19a41c29a5496, type: 3}
+  hotspot: {x: 0, y: 0}
 --- !u!1 &2064204730
 GameObject:
   m_ObjectHideFlags: 0
