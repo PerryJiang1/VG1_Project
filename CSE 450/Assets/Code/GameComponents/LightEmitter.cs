@@ -30,12 +30,13 @@ public class LightEmitter : MonoBehaviour
     {
         EmitLight(transform.position, transform.right, 0);
 
-        // Renew portal activation/deactivation
     }
 
-    private void EmitLight(Vector2 origin, Vector2 direction, int reflectionCount)
+    public void EmitLight(Vector2 origin, Vector2 direction, int reflectionCount)
     {
-        CheckPortalsActivation();
+        // Renew portal activation/deactivation
+        CheckPortalsActivation(origin, direction);
+        
         if (reflectionCount == 0)
         {
             lineRenderer.positionCount = 1;
@@ -69,6 +70,7 @@ public class LightEmitter : MonoBehaviour
         }
 
 
+
         if (hit.collider != null)
         {
 
@@ -86,16 +88,18 @@ public class LightEmitter : MonoBehaviour
                         
                     }
                 }
+                //Debug.Log("hit point: " + hit.point);
                 previousHitCollider = null;
                 lineRenderer.positionCount += 1;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
                 return;
             }
 
+
             // Detecting mirrors
             else if (hit.collider.CompareTag("Mirror") && !hasReflected)
             {
-                Debug.Log("Light hit mirror, reflecting light");
+                //Debug.Log("Light hit mirror, reflecting light");
                 Vector2 xAxisNormal = hit.transform.up;
                 Vector2 normal = new Vector2(xAxisNormal.y, -xAxisNormal.x);
                
@@ -103,9 +107,11 @@ public class LightEmitter : MonoBehaviour
                 Vector2 normalizedNormal = normal.normalized;
                 Vector2 reflectedDirection = Vector2.Reflect(normalizedDirection, normalizedNormal);
 
-                Debug.DrawRay(hit.point, normalizedNormal * lightRange, Color.blue, 1f);
+                // Renew portal activation/deactivation
+                CheckPortalsActivation(hit.point, reflectedDirection);
+                //Debug.DrawRay(hit.point, normalizedNormal * lightRange, Color.blue, 1f);
                 //Debug.Log("Normalized direction: " + normalizedDirection);
-                Debug.Log("Normalized normal: " + normalizedNormal);
+                //Debug.Log("Normalized normal: " + normalizedNormal);
                 //Debug.Log("Hit point: " + hit.point);
                 //Debug.Log("Reflected direction: " + reflectedDirection);
 
@@ -115,9 +121,9 @@ public class LightEmitter : MonoBehaviour
 
                 hasReflected = true;
 
-                Debug.Log("reflection Count: " + reflectionCount);
-                Debug.Log("origin: " + origin);
-                Debug.Log("hit point: " + hit.point);
+                //Debug.Log("reflection Count: " + reflectionCount);
+                //Debug.Log("origin: " + origin);
+                //Debug.Log("hit point: " + hit.point);
 
                 previousHitCollider = hit.collider;
 
@@ -129,7 +135,10 @@ public class LightEmitter : MonoBehaviour
             // Detecting ground/player, light stops there
             else if (hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Player"))
             {
-                Debug.Log("Light hit ground or player, stopping light.");
+                //Debug.Log("Raycast hit: " + hit.collider.name + "  at position: " + hit.point);
+                // Renew portal activation/deactivation
+                //CheckPortalsActivation();
+                //Debug.Log("Light hit ground or player, stopping light.");
                 previousHitCollider = null;
                 // Add a collision point
                 lineRenderer.positionCount += 1;
@@ -148,6 +157,8 @@ public class LightEmitter : MonoBehaviour
         }
         else
         {
+            // Renew portal activation/deactivation
+            //CheckPortalsActivation();
             previousHitCollider = null;
             // If no collision, then draw a line with length of lightRange
             lineRenderer.positionCount += 1;
@@ -156,7 +167,7 @@ public class LightEmitter : MonoBehaviour
     }
 
 
-    private void CheckPortalsActivation()
+    public void CheckPortalsActivation(Vector2 origin, Vector2 direction)
     {
         List<Portal> portalsToDeactivate = new List<Portal>();
 
@@ -164,7 +175,7 @@ public class LightEmitter : MonoBehaviour
         {
             // Check whether portal gets collided with light
             Vector2 directionToPortal = (portal.transform.position - transform.position).normalized;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPortal, lightRange, portalLayer | groundAndPlayerLayer);
+            RaycastHit2D hit = Physics2D.Raycast(origin, directionToPortal, lightRange, portalLayer | groundAndPlayerLayer);
 
             // If light doesn't detect portal or it hits ground/player, then deactivate it
             if (hit.collider == null || hit.collider.gameObject != portal.gameObject)
@@ -176,9 +187,11 @@ public class LightEmitter : MonoBehaviour
         // Deactivate portals in portalsToDeactivate set
         foreach (Portal portal in portalsToDeactivate)
         {
-            portal.DeactivatePortal(); 
+            portal.DeactivatePortal();
             activePortals.Remove(portal);
         }
     }
+
+
 }
 

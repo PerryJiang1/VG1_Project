@@ -2,10 +2,17 @@ using UnityEngine;
 
 public class Mirror : MonoBehaviour
 {
+    private LightEmitter lightEmitter;
     // Speed of rotation
-    public float rotationSpeed = 100f;
+    public float rotationSpeed = 30f;
     public GameObject player;
-    public float maxDistance = 3f;
+    public float maxDistance = 5f;
+
+    void Start()
+    {
+        // 获取场景中的 LightEmitter 对象
+        lightEmitter = FindObjectOfType<LightEmitter>();
+    }
 
     void Update()
     {
@@ -24,6 +31,11 @@ public class Mirror : MonoBehaviour
                 RotateMirror(rotationSpeed);
             }
         }
+
+        //if (lightEmitter != null)
+        //{
+        //    lightEmitter.CheckPortalsActivation();
+        //}
     }
 
     private void RotateMirror(float speed)
