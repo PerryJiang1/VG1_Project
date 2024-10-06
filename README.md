@@ -1,2 +1,3 @@
 # VG1_Project
-A 2D puzzle RPG where you play as a robot on a quest to rediscover lost memories and piece together who you really are, solving challenges in a strange, unfamiliar world.
+We want to create a game centered around something like light. In each level, there is a point light source that can only illuminate a limited area. The goal is to use various devices or tools such as mirrors and portals and so on to direct the light to a specific location, which will trigger different mechanisms and create a path for the protagonist to advance. The concept is somewhat similar to the game 'Where's My Water?'
+
