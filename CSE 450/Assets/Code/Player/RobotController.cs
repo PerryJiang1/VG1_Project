@@ -77,6 +77,12 @@ namespace CharacterMovement
 
         public void MoveRight(InputAction.CallbackContext value)
         {
+            // Don't process input when time out
+            if (!isControlEnabled)
+            {
+                return;
+            }
+
             if (isControlEnabled)
             {
                 if (value.started)
@@ -101,6 +107,12 @@ namespace CharacterMovement
 
         public void MoveLeft(InputAction.CallbackContext value)
         {
+            // Don't process input when time out
+            if (!isControlEnabled)
+            {
+                return;
+            }
+
             if (isControlEnabled)
             {
                 if (value.started)
@@ -134,6 +146,11 @@ namespace CharacterMovement
         public void DisableControl()
         {
             isControlEnabled = false;
+        }
+
+        public void EnableControl()
+        {
+            isControlEnabled = true;
         }
     }
 }
