@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+
 public class LightEmitter : MonoBehaviour
 {
     public float lightRange = 10f; // Range of light
@@ -8,8 +9,11 @@ public class LightEmitter : MonoBehaviour
     public LayerMask mirrorLayer;
     public LayerMask groundAndPlayerLayer;
     private LineRenderer lineRenderer;
+    public LayerMask actButtonLayer;
+
 
     private HashSet<Portal> activePortals = new HashSet<Portal>();
+    private HashSet<ActButton> activeButtons = new HashSet<ActButton>();
     public int maxReflections = 5;
     private bool hasReflected = false;
     private Collider2D previousHitCollider = null;
@@ -146,6 +150,25 @@ public class LightEmitter : MonoBehaviour
                 return;
             }
 
+            // Detecting buttons
+            else if (hit.collider.CompareTag("ActButton"))
+            {
+                ActButton button = hit.collider.GetComponent<ActButton>();
+                if (button != null)
+                {
+
+                    if (!activeButtons.Contains(button))
+                    {
+                        button.Activate();
+                        activeButtons.Add(button);
+                    }
+                }
+
+                lineRenderer.positionCount += 1;
+                lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
+                return;
+            }
+
             // If detecting other components, add a collision point (For later game components)
             else
             {
@@ -189,6 +212,29 @@ public class LightEmitter : MonoBehaviour
         {
             portal.DeactivatePortal();
             activePortals.Remove(portal);
+        }
+    }
+
+    public void CheckButtonsActivation(Vector2 origin, Vector2 direction)
+    {
+        List<ActButton> buttonsToDeactivate = new List<ActButton>();
+
+        foreach (ActButton button in activeButtons)
+        {
+            Vector2 directionToButton = (button.transform.position - transform.position).normalized;
+            RaycastHit2D hit = Physics2D.Raycast(origin, directionToButton, lightRange, actButtonLayer | groundAndPlayerLayer);
+
+            if (hit.collider == null || hit.collider.gameObject != button.gameObject)
+            {
+                buttonsToDeactivate.Add(button);  // 如果光线不再照射，标记为需要取消激活
+            }
+        }
+
+        // 取消激活不再被光照射的按钮
+        foreach (ActButton button in buttonsToDeactivate)
+        {
+            button.Deactivate();  // 调用按钮的取消激活方法
+            activeButtons.Remove(button);  // 从激活的按钮集合中移除
         }
     }
 
