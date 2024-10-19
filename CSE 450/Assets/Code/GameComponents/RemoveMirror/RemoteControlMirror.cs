@@ -7,6 +7,7 @@ public class RemoteControlMirror : MonoBehaviour
     public float activeAngle = 90f;      
     public bool inactiveClockwise = true;  
     public float inactiveAngle = 90f;      
+    private bool isRotating = false;
 
     [SerializeField] private float rotationSpeed = 30f;  
     private Coroutine currentRotationCoroutine;
@@ -15,7 +16,9 @@ public class RemoteControlMirror : MonoBehaviour
     {
         
     }
-
+    public bool IsRotating(){
+        return isRotating;
+    }
     public void Activate()
     {
         if (currentRotationCoroutine != null)
@@ -36,6 +39,7 @@ public class RemoteControlMirror : MonoBehaviour
 
     private IEnumerator RotateMirror(bool clockwise, float angleToRotate)
     {
+        isRotating = true;
         float direction = clockwise ? -1f : 1f;  
         float currentRotation = transform.rotation.eulerAngles.z;  
         float targetRotation = currentRotation + (direction * angleToRotate);  
@@ -48,5 +52,6 @@ public class RemoteControlMirror : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Euler(0, 0, targetRotation);  
+        isRotating = false;
     }
 }
