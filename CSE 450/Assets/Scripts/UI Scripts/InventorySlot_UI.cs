@@ -43,7 +43,9 @@ public class InventorySlot_UI : MonoBehaviour
         }
         else
         {
-            ClearSlot();
+            itemSprite.color = Color.clear;
+            itemSprite.sprite = null;
+            itemCount.text = "";
         }  
 
     }

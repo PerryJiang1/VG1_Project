@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55bfd7710f34c5a46bc8dd1346002459, type: 3}
-  m_Name: Test item 2
+  m_Name: Potato
   m_EditorClassIdentifier: 
   ID: 0
-  DisplayName: Test item 2
-  Description: this is another test item
-  Icon1: {fileID: 0}
+  DisplayName: Potato
+  Description: This is a potato
+  Icon: {fileID: -55756198, guid: 0c4c6ef78d78ddd43983bcd99248992a, type: 3}
   MaxStackSize: 1
