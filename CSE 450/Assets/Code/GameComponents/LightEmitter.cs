@@ -150,7 +150,8 @@ public class LightEmitter : MonoBehaviour
             }
             // Detecting buttons
             else if (hit.collider.CompareTag("ActButton"))
-            {
+            {   print("Hello, Unity!");
+
                 ActButton button = hit.collider.GetComponent<ActButton>();
                 if (button != null)
                 {

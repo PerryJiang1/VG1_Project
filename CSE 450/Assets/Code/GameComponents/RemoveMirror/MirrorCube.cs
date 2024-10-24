@@ -8,58 +8,60 @@ public class MirrorCube : MonoBehaviour
     public float mirrorMoveSpeed = 2f;  // Speed at which the mirror moves
 
     private Rigidbody2D playerRb;
-    private bool isPlayerColliding = false;  // 用于跟踪玩家是否与镜子碰撞
-    private Vector2 moveDirection;  // 用于记录镜子的移动方向
+    private bool isPlayerColliding = false;  // Tracks if the player is colliding with the mirror
+    private Vector2 moveDirection;  // Records the direction of the mirror's movement
 
     void Start()
     {
-        // 获取玩家的 Rigidbody2D 组件以访问速度
+        // Get the player's Rigidbody2D component to access velocity
         playerRb = player.GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        // 如果玩家正在与镜子碰撞，镜子将持续移动
+        // Only move the mirror if the player is colliding with it
         if (isPlayerColliding)
         {
             MoveMirror(moveDirection);
         }
     }
 
-    // 当玩家碰撞时，触发持续移动
+    // When the player collides, trigger continuous movement
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Ensure that only the player can trigger this logic
         if (collision.gameObject == player)
         {
-            Vector2 playerVelocity = playerRb.velocity;  // 获取玩家的速度
+            Vector2 playerVelocity = playerRb.velocity;  // Get the player's velocity
 
-            // 根据玩家的速度确定移动方向
-            if (playerVelocity.x > 0)  // 玩家向右移动
+            // Determine the movement direction based on the player's velocity
+            if (playerVelocity.x > 0)  // Player is moving right
             {
-                moveDirection = Vector2.right;  // 镜子向右移动
+                moveDirection = Vector2.right;  // Move the mirror to the right
             }
-            else if (playerVelocity.x < 0)  // 玩家向左移动
+            else if (playerVelocity.x < 0)  // Player is moving left
             {
-                moveDirection = Vector2.left;  // 镜子向左移动
+                moveDirection = Vector2.left;  // Move the mirror to the left
             }
 
-            isPlayerColliding = true;  // 标记玩家正在与镜子碰撞
+            isPlayerColliding = true;  // Mark that the player is colliding with the mirror
         }
     }
 
-    // 当玩家离开碰撞区域时停止移动
+    // Stop moving when the player leaves the collision area
     private void OnCollisionExit2D(Collision2D collision)
     {
+        // Ensure this is the player leaving
         if (collision.gameObject == player)
         {
-            isPlayerColliding = false;  // 玩家离开，停止镜子的移动
+            isPlayerColliding = false;  // Player left, stop moving the mirror
         }
     }
 
-    // 持续移动镜子
+    // Move the mirror continuously
     private void MoveMirror(Vector2 direction)
     {
-        // 使用世界坐标系，确保移动始终沿水平轴（X轴）
+        // Move along the horizontal axis (X-axis) using world coordinates
         transform.Translate(direction * mirrorMoveSpeed * Time.deltaTime, Space.World);
     }
 
