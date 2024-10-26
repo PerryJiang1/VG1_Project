@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "VG1_Project.sln"
+    "dotnet.defaultSolution": "CSE 450.sln"
 }
