@@ -11,7 +11,7 @@ public class InventorySlot
 
     public InventoryItemData ItemData => itemData;
     public int StackSize => stackSize;
-
+    
     public InventorySlot(InventoryItemData source, int amount)
     {
         itemData = source;
@@ -29,11 +29,26 @@ public class InventorySlot
         stackSize = -1;
     }
 
+    public void AssignItem(InventorySlot invSlot)
+    {
+        if (itemData == invSlot.ItemData) AddToStack(invSlot.stackSize);
+        else
+        {
+            itemData = invSlot.ItemData;
+            stackSize = 0;
+            AddToStack(invSlot.stackSize);
+        }
+      
+    }
+
+
     public void UpdateInventorySlot(InventoryItemData data, int amount)
     {
         itemData = data;
         stackSize = amount;
     }
+
+
 
     public bool RoomLeftInStack(int amountToAdd, out int amountRemaining)
     {
@@ -55,6 +70,21 @@ public class InventorySlot
     public void RemoveFromStack(int amount)
     {
         stackSize -= amount;
+    }
+
+    public bool SplitStack(out InventorySlot splitStack)
+    {
+        if (stackSize <= 1)
+        {
+            splitStack = null;
+            return false;
+        }
+
+        int halfStack = Mathf.RoundToInt(stackSize / 2);
+        RemoveFromStack(halfStack);
+
+        splitStack = new InventorySlot(itemData, halfStack);
+        return true;
     }
 
 }

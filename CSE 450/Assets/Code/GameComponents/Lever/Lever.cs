@@ -20,14 +20,14 @@ public class Lever : MonoBehaviour
 
             if (playerDirection > 0) 
             {
-                if (isFlipped)
+                if (isFlipped && remoteMirror != null && !remoteMirror.IsRotating()) // 添加检查旋转状态
                 {
                     Unflip();
                 }
             }
             else if (playerDirection < 0)
             {
-                if (!isFlipped)
+                if (!isFlipped && remoteMirror != null && !remoteMirror.IsRotating()) // 添加检查旋转状态
                 {
                     Flip();
                 }

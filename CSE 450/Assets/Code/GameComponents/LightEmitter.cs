@@ -1,16 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
 public class LightEmitter : MonoBehaviour
 {
     public float lightRange = 10f; // Range of light
     public LayerMask portalLayer;  
     public LayerMask mirrorLayer;
     public LayerMask groundAndPlayerLayer;
-    private LineRenderer lineRenderer;
     public LayerMask actButtonLayer;
-
+    private LineRenderer lineRenderer;
 
     private HashSet<Portal> activePortals = new HashSet<Portal>();
     private HashSet<ActButton> activeButtons = new HashSet<ActButton>();
@@ -40,6 +38,7 @@ public class LightEmitter : MonoBehaviour
     {
         // Renew portal activation/deactivation
         CheckPortalsActivation(origin, direction);
+        CheckButtonsActivation(origin, direction);
         
         if (reflectionCount == 0)
         {
@@ -62,7 +61,7 @@ public class LightEmitter : MonoBehaviour
         }
 
         // Merge all layers needed for detection
-        LayerMask combinedLayerMask = portalLayer | mirrorLayer | groundAndPlayerLayer;
+        LayerMask combinedLayerMask = portalLayer | mirrorLayer | groundAndPlayerLayer | actButtonLayer;
 
         // Emit light and detect whether collide with any targets
         RaycastHit2D hit = Physics2D.Raycast(origin, direction, lightRange, combinedLayerMask);
@@ -149,18 +148,18 @@ public class LightEmitter : MonoBehaviour
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
                 return;
             }
-
             // Detecting buttons
             else if (hit.collider.CompareTag("ActButton"))
             {
                 ActButton button = hit.collider.GetComponent<ActButton>();
                 if (button != null)
                 {
-
+                    
                     if (!activeButtons.Contains(button))
-                    {
+                    {   
+                        print("Hello, Unity!");
                         button.Activate();
-                        activeButtons.Add(button);
+                        activeButtons.Add(button);  
                     }
                 }
 
@@ -169,13 +168,14 @@ public class LightEmitter : MonoBehaviour
                 return;
             }
 
-            // If detecting other components, add a collision point (For later game components)
+            
             else
             {
                 previousHitCollider = null;
                 lineRenderer.positionCount += 1;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
             }
+
 
         }
         else
@@ -214,8 +214,7 @@ public class LightEmitter : MonoBehaviour
             activePortals.Remove(portal);
         }
     }
-
-    public void CheckButtonsActivation(Vector2 origin, Vector2 direction)
+        public void CheckButtonsActivation(Vector2 origin, Vector2 direction)
     {
         List<ActButton> buttonsToDeactivate = new List<ActButton>();
 
@@ -226,15 +225,16 @@ public class LightEmitter : MonoBehaviour
 
             if (hit.collider == null || hit.collider.gameObject != button.gameObject)
             {
-                buttonsToDeactivate.Add(button);  // Èç¹û¹âÏß²»ÔÙÕÕÉä£¬±ê¼ÇÎªĞèÒªÈ¡Ïû¼¤»î
+                buttonsToDeactivate.Add(button);  // å¦‚æœå…‰çº¿ä¸å†ç…§å°„ï¼Œæ ‡è®°ä¸ºéœ€è¦å–æ¶ˆæ¿€æ´»
             }
         }
 
-        // È¡Ïû¼¤»î²»ÔÙ±»¹âÕÕÉäµÄ°´Å¥
+        // å–æ¶ˆæ¿€æ´»ä¸å†è¢«å…‰ç…§å°„çš„æŒ‰é’®
         foreach (ActButton button in buttonsToDeactivate)
         {
-            button.Deactivate();  // µ÷ÓÃ°´Å¥µÄÈ¡Ïû¼¤»î·½·¨
-            activeButtons.Remove(button);  // ´Ó¼¤»îµÄ°´Å¥¼¯ºÏÖĞÒÆ³ı
+            
+            button.Deactivate();  // è°ƒç”¨æŒ‰é’®çš„å–æ¶ˆæ¿€æ´»æ–¹æ³•
+            activeButtons.Remove(button);  // ä»æ¿€æ´»çš„æŒ‰é’®é›†åˆä¸­ç§»é™¤
         }
     }
 

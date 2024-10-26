@@ -15,5 +15,5 @@ MonoBehaviour:
   ID: 0
   DisplayName: Item 2
   Description: 
-  Icon: {fileID: 0}
+  Icon: {fileID: 903044172, guid: 5aad733ca3dfb9349b6ccd5e54685bb6, type: 3}
   MaxStackSize: 5
