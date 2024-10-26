@@ -10,7 +10,7 @@ namespace CharacterMovement
         Rigidbody2D rb;
 
         [SerializeField] int speed;
-        [SerializeField] float jumpForce = 8.3f;
+        [SerializeField] float jumpForce = 9f;
         [SerializeField] LayerMask groundLayer;
         [SerializeField] Transform groundCheck;
         [SerializeField] float groundCheckRadius = 0.1f;
