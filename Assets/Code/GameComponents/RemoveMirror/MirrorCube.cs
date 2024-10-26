@@ -6,7 +6,6 @@ public class MirrorCube : MonoBehaviour
     public GameObject player;
     public float maxDistance = 5f;
     public float mirrorMoveSpeed = 2f;  // Speed at which the mirror moves
-
     private Rigidbody2D playerRb;
     private bool isPlayerColliding = false;  // Tracks if the player is colliding with the mirror
     private Vector2 moveDirection;  // Records the direction of the mirror's movement
@@ -46,6 +45,7 @@ public class MirrorCube : MonoBehaviour
 
             isPlayerColliding = true;  // Mark that the player is colliding with the mirror
         }
+        
     }
 
     // Stop moving when the player leaves the collision area

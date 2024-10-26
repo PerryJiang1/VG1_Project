@@ -10,7 +10,7 @@ public class Mirror : MonoBehaviour
 
     void Start()
     {
-        // »ñÈ¡³¡¾°ÖÐµÄ LightEmitter ¶ÔÏó
+        // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ LightEmitter ï¿½ï¿½ï¿½ï¿½
         lightEmitter = FindObjectOfType<LightEmitter>();
     }
 
@@ -18,6 +18,7 @@ public class Mirror : MonoBehaviour
     {
         // Calculate the distance between the player and the mirror
         float distance = Vector3.Distance(player.transform.position, transform.position);
+
 
         // Only rotate if the distance between the player and the mirror is less than maxDistance
         if (distance < maxDistance)
