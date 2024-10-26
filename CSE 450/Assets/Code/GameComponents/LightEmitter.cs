@@ -150,14 +150,15 @@ public class LightEmitter : MonoBehaviour
             }
             // Detecting buttons
             else if (hit.collider.CompareTag("ActButton"))
-            {   print("Hello, Unity!");
+            {   
 
                 ActButton button = hit.collider.GetComponent<ActButton>();
                 if (button != null)
                 {
                     
                     if (!activeButtons.Contains(button))
-                    {
+                    {   
+                        print("Hello, Unity!");
                         button.Activate();
                         activeButtons.Add(button);  
                     }
@@ -232,6 +233,7 @@ public class LightEmitter : MonoBehaviour
         // 取消激活不再被光照射的按钮
         foreach (ActButton button in buttonsToDeactivate)
         {
+            
             button.Deactivate();  // 调用按钮的取消激活方法
             activeButtons.Remove(button);  // 从激活的按钮集合中移除
         }
