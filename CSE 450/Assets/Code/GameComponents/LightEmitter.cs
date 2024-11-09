@@ -12,7 +12,7 @@ public class LightEmitter : MonoBehaviour
 
     private HashSet<Portal> activePortals = new HashSet<Portal>();
     private HashSet<ActButton> activeButtons = new HashSet<ActButton>();
-    public int maxReflections = 5;
+    public int maxReflections = 20;
     private bool hasReflected = false;
     private Collider2D previousHitCollider = null;
 
@@ -51,6 +51,7 @@ public class LightEmitter : MonoBehaviour
         if (reflectionCount >= maxReflections)
         {
             Debug.Log("Reached maximum reflection limit.");
+            Debug.Log(maxReflections);
             return;
         }
 

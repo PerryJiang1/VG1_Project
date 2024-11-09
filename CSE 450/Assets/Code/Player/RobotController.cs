@@ -126,21 +126,21 @@ namespace CharacterMovement
             }
         }
 
-        // 添加新功能：按下B键增大角色，按下N键缩小角色
+        
         private void Update()
         {
-            // 仅在控制启用时检测按键
+            
             if (isControlEnabled)
             {
                 if (Keyboard.current.bKey.wasPressedThisFrame)
                 {
-                    transform.localScale *= 2; // 大小增加两倍
-                    jumpForce *= 2; // 跳跃高度增加两倍
+                    transform.localScale *= 2; 
+                    jumpForce *= 2; 
                 }
                 else if (Keyboard.current.nKey.wasPressedThisFrame)
                 {
-                    transform.localScale *= 0.5f; // 大小缩小两倍
-                    jumpForce *= 0.5f; // 跳跃高度减少两倍
+                    transform.localScale *= 0.5f; 
+                    jumpForce *= 0.5f; 
                 }
             }
         }
