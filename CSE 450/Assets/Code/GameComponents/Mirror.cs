@@ -7,17 +7,11 @@ public class Mirror : MonoBehaviour
     public float rotationSpeed = 30f;
     public GameObject player;
     public float maxDistance = 5f;
-    private Renderer mirrorRenderer;
-
 
     void Start()
     {
+        // 获取场景中的 LightEmitter 对象
         lightEmitter = FindObjectOfType<LightEmitter>();
-        mirrorRenderer = GetComponent<Renderer>();
-        if (mirrorRenderer != null)
-        {
-            mirrorRenderer.material.color = Color.white;
-        }
     }
 
     void Update()
@@ -28,11 +22,6 @@ public class Mirror : MonoBehaviour
         // Only rotate if the distance between the player and the mirror is less than maxDistance
         if (distance < maxDistance)
         {
-            if (mirrorRenderer != null)
-            {
-                mirrorRenderer.material.color = Color.blue;
-            }
-
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 RotateMirror(-rotationSpeed);
@@ -40,13 +29,6 @@ public class Mirror : MonoBehaviour
             else if (Input.GetKey(KeyCode.RightArrow))
             {
                 RotateMirror(rotationSpeed);
-            }
-        }
-        else
-        {
-            if (mirrorRenderer != null)
-            {
-                mirrorRenderer.material.color = Color.white;
             }
         }
 

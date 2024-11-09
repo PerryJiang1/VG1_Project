@@ -8,7 +8,6 @@ public class MovingPlatform : MonoBehaviour
     public float speed; 
     Vector3 targetPos;
     private Rigidbody2D platformRb;
-    private bool isWaiting = false;
 
     private void Start()
     {
@@ -22,52 +21,23 @@ public class MovingPlatform : MonoBehaviour
         targetPos = posA.position;
     }
 
-    //private void FixedUpdate()
-    //{
-    //    // Move towards the target position
-    //    if (Vector2.Distance(transform.position, posA.position) < 0.05f)
-    //    {
-    //        // If near position A, set target to position B
-    //        targetPos = posB.position;
-    //    }
-
-    //    if (Vector2.Distance(transform.position, posB.position) < 0.05f)
-    //    {
-    //        // If near position B, set target to position A
-    //        targetPos = posA.position;
-    //    }
-
-    //    // Move the platform towards the target position
-    //    transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-    //}
-
     private void FixedUpdate()
     {
-        if (isWaiting) return;
-
         // Move towards the target position
         if (Vector2.Distance(transform.position, posA.position) < 0.05f)
         {
-            // If near position A, set target to position B and start waiting
-            StartCoroutine(PauseBeforeMoving(posB.position));
+            // If near position A, set target to position B
+            targetPos = posB.position;
         }
 
         if (Vector2.Distance(transform.position, posB.position) < 0.05f)
         {
-            // If near position B, set target to position A and start waiting
-            StartCoroutine(PauseBeforeMoving(posA.position));
+            // If near position B, set target to position A
+            targetPos = posA.position;
         }
 
         // Move the platform towards the target position
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-    }
-
-    private IEnumerator PauseBeforeMoving(Vector3 newTargetPos)
-    {
-        isWaiting = true;
-        yield return new WaitForSeconds(2f);
-        targetPos = newTargetPos;
-        isWaiting = false; 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
