@@ -12,7 +12,7 @@ public class LightEmitter : MonoBehaviour
 
     private HashSet<Portal> activePortals = new HashSet<Portal>();
     private HashSet<ActButton> activeButtons = new HashSet<ActButton>();
-    public int maxReflections = 20;
+    public int maxReflections = 5;
     private bool hasReflected = false;
     private Collider2D previousHitCollider = null;
 
@@ -51,7 +51,6 @@ public class LightEmitter : MonoBehaviour
         if (reflectionCount >= maxReflections)
         {
             Debug.Log("Reached maximum reflection limit.");
-            Debug.Log(maxReflections);
             return;
         }
 
@@ -151,8 +150,7 @@ public class LightEmitter : MonoBehaviour
             }
             // Detecting buttons
             else if (hit.collider.CompareTag("ActButton"))
-            {   
-
+            {
                 ActButton button = hit.collider.GetComponent<ActButton>();
                 if (button != null)
                 {
