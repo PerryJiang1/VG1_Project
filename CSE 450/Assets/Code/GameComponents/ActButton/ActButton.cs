@@ -25,6 +25,7 @@ public class ActButton : MonoBehaviour
     {
         if (targetBlock != null)
         {
+            
             targetBlock.Deactivate();  
         }
     }

@@ -23,6 +23,7 @@ public class Portal : MonoBehaviour
 
     public void DeactivatePortal()
     {
+        Debug.Log("123123");
         isActivated = false;
         spriteRenderer.color = Color.black;
     }
