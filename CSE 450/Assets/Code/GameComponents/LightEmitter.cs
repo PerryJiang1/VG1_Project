@@ -12,7 +12,7 @@ public class LightEmitter : MonoBehaviour
 
     private HashSet<Portal> activePortals = new HashSet<Portal>();
     private HashSet<ActButton> activeButtons = new HashSet<ActButton>();
-    public int maxReflections = 5;
+    public int maxReflections = 20;
     private bool hasReflected = false;
     private Collider2D previousHitCollider = null;
 
@@ -51,6 +51,7 @@ public class LightEmitter : MonoBehaviour
         if (reflectionCount >= maxReflections)
         {
             Debug.Log("Reached maximum reflection limit.");
+            Debug.Log(maxReflections);
             return;
         }
 
@@ -112,6 +113,7 @@ public class LightEmitter : MonoBehaviour
 
                 // Renew portal activation/deactivation
                 CheckPortalsActivation(hit.point, reflectedDirection);
+                CheckButtonsActivation(hit.point, reflectedDirection);
                 //Debug.DrawRay(hit.point, normalizedNormal * lightRange, Color.blue, 1f);
                 //Debug.Log("Normalized direction: " + normalizedDirection);
                 //Debug.Log("Normalized normal: " + normalizedNormal);
@@ -150,7 +152,8 @@ public class LightEmitter : MonoBehaviour
             }
             // Detecting buttons
             else if (hit.collider.CompareTag("ActButton"))
-            {
+            {   
+
                 ActButton button = hit.collider.GetComponent<ActButton>();
                 if (button != null)
                 {
@@ -162,7 +165,7 @@ public class LightEmitter : MonoBehaviour
                         activeButtons.Add(button);  
                     }
                 }
-
+                previousHitCollider = null;
                 lineRenderer.positionCount += 1;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
                 return;
@@ -203,6 +206,9 @@ public class LightEmitter : MonoBehaviour
             // If light doesn't detect portal or it hits ground/player, then deactivate it
             if (hit.collider == null || hit.collider.gameObject != portal.gameObject)
             {
+                Debug.Log(hit.collider.gameObject.name);
+                Debug.Log("divide");
+                Debug.Log(portal.gameObject.name);
                 portalsToDeactivate.Add(portal);
             }
         }
@@ -223,8 +229,12 @@ public class LightEmitter : MonoBehaviour
             Vector2 directionToButton = (button.transform.position - transform.position).normalized;
             RaycastHit2D hit = Physics2D.Raycast(origin, directionToButton, lightRange, actButtonLayer | groundAndPlayerLayer);
 
+            
             if (hit.collider == null || hit.collider.gameObject != button.gameObject)
             {
+                Debug.Log(hit.collider.gameObject.name);
+                Debug.Log("divide");
+                Debug.Log(button.gameObject.name);
                 buttonsToDeactivate.Add(button);  // 如果光线不再照射，标记为需要取消激活
             }
         }

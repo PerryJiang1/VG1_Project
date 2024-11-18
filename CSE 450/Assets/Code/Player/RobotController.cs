@@ -10,7 +10,7 @@ namespace CharacterMovement
         Rigidbody2D rb;
 
         [SerializeField] int speed;
-        [SerializeField] float jumpForce = 9f;
+        [SerializeField] float jumpForce = 8.3f;
         [SerializeField] LayerMask groundLayer;
         [SerializeField] Transform groundCheck;
         [SerializeField] float groundCheckRadius = 0.1f;
@@ -41,7 +41,8 @@ namespace CharacterMovement
 
         private void FixedUpdate()
         {
-            if (isControlEnabled) {
+            if (isControlEnabled)
+            {
                 float targetSpeed = speed * speedMultiplier;
                 rb.velocity = new Vector2(targetSpeed, rb.velocity.y);
 
@@ -55,7 +56,6 @@ namespace CharacterMovement
                 {
                     rb.velocity += Vector2.up * Physics2D.gravity.y * (riseMultiplier - 1) * Time.fixedDeltaTime;
                 }
-
 
                 if (speedMultiplier == 1 && Time.time - lastLeftPressorLeaseTime < delta)
                 {
@@ -72,64 +72,48 @@ namespace CharacterMovement
             {
                 rb.velocity = Vector2.zero;
             }
-                
         }
 
         public void MoveRight(InputAction.CallbackContext value)
         {
-            // Don't process input when time out
-            if (!isControlEnabled)
-            {
-                return;
-            }
+            if (!isControlEnabled) return;
 
-            if (isControlEnabled)
+            if (value.started)
             {
-                if (value.started)
+                buttonPressed = true;
+                lastRightPressorLeaseTime = Time.time;
+                speedMultiplier = 1;
+                spriteRenderer.flipX = false;
+            }
+            else if (value.canceled)
+            {
+                buttonPressed = false;
+                lastRightPressorLeaseTime = Time.time;
+                if (Time.time - lastLeftPressorLeaseTime > delta)
                 {
-                    buttonPressed = true;
-                    lastRightPressorLeaseTime = Time.time;
-                    speedMultiplier = 1;
-                    spriteRenderer.flipX = false;
-                }
-                else if (value.canceled)
-                {
-                    buttonPressed = false;
-                    lastRightPressorLeaseTime = Time.time;
-                    if (Time.time - lastLeftPressorLeaseTime > delta)
-                    {
-                        speedMultiplier = 0;
-                    }
+                    speedMultiplier = 0;
                 }
             }
-                
         }
 
         public void MoveLeft(InputAction.CallbackContext value)
         {
-            // Don't process input when time out
-            if (!isControlEnabled)
-            {
-                return;
-            }
+            if (!isControlEnabled) return;
 
-            if (isControlEnabled)
+            if (value.started)
             {
-                if (value.started)
+                buttonPressed = true;
+                lastLeftPressorLeaseTime = Time.time;
+                speedMultiplier = -1;
+                spriteRenderer.flipX = true;
+            }
+            else if (value.canceled)
+            {
+                buttonPressed = false;
+                lastLeftPressorLeaseTime = Time.time;
+                if (Time.time - lastRightPressorLeaseTime > delta)
                 {
-                    buttonPressed = true;
-                    lastLeftPressorLeaseTime = Time.time;
-                    speedMultiplier = -1;
-                    spriteRenderer.flipX = true;
-                }
-                else if (value.canceled)
-                {
-                    buttonPressed = false;
-                    lastLeftPressorLeaseTime = Time.time;
-                    if (Time.time - lastRightPressorLeaseTime > delta)
-                    {
-                        speedMultiplier = 0;
-                    }
+                    speedMultiplier = 0;
                 }
             }
         }
@@ -139,6 +123,25 @@ namespace CharacterMovement
             if (value.started && onGround)
             {
                 rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            }
+        }
+
+        
+        private void Update()
+        {
+            
+            if (isControlEnabled)
+            {
+                if (Keyboard.current.bKey.wasPressedThisFrame)
+                {
+                    transform.localScale *= 2; 
+                    jumpForce *= 2; 
+                }
+                else if (Keyboard.current.nKey.wasPressedThisFrame)
+                {
+                    transform.localScale *= 0.5f; 
+                    jumpForce *= 0.5f; 
+                }
             }
         }
 
