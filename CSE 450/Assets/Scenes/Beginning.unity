@@ -156,7 +156,7 @@ MonoBehaviour:
   startButton: {fileID: 1836379578}
   canvasGroup: {fileID: 1742942924}
   fadeDuration: 1
-  nextSceneName: Level 1
+  nextSceneName: Level Menu
 --- !u!4 &43670272
 Transform:
   m_ObjectHideFlags: 0
@@ -816,7 +816,7 @@ MonoBehaviour:
   startButton: {fileID: 1836379578}
   canvasGroup: {fileID: 1742942924}
   fadeDuration: 1
-  nextSceneName: Level 1
+  nextSceneName: Level Menu
 --- !u!114 &1836379578
 MonoBehaviour:
   m_ObjectHideFlags: 0
