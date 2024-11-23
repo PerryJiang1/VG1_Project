@@ -29,9 +29,12 @@ namespace CharacterMovement
 
         private bool isControlEnabled = true;
 
+        private Vector3 originalScale; // MODIFIED: 保存角色的原始大小
+
         void Start()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+            originalScale = transform.localScale; // MODIFIED: 初始化为角色的默认大小
         }
 
         private void Awake()
@@ -126,21 +129,29 @@ namespace CharacterMovement
             }
         }
 
-        
         private void Update()
         {
-            
             if (isControlEnabled)
             {
-                if (Keyboard.current.bKey.wasPressedThisFrame)
+                if (Keyboard.current.bKey.wasPressedThisFrame && transform.localScale == originalScale) // MODIFIED: 限制只允许从原始大小变大
                 {
-                    transform.localScale *= 2; 
-                    jumpForce *= 2; 
+                    transform.localScale = originalScale * 2; // 变大一倍
+                    jumpForce *= 2; // 提高跳跃力
                 }
-                else if (Keyboard.current.nKey.wasPressedThisFrame)
+                else if (Keyboard.current.nKey.wasPressedThisFrame && transform.localScale == originalScale * 2) // MODIFIED: 限制只允许从变大状态恢复
                 {
-                    transform.localScale *= 0.5f; 
-                    jumpForce *= 0.5f; 
+                    transform.localScale = originalScale; // 恢复到原始大小
+                    jumpForce /= 2; // 恢复跳跃力
+                }
+                else if (Keyboard.current.nKey.wasPressedThisFrame && transform.localScale == originalScale) // MODIFIED: 限制只允许从原始大小变小
+                {
+                    transform.localScale = originalScale * 0.5f; // 缩小一倍
+                    jumpForce *= 0.5f; // 降低跳跃力
+                }
+                else if (Keyboard.current.bKey.wasPressedThisFrame && transform.localScale == originalScale * 0.5f) // MODIFIED: 限制只允许从变小状态恢复
+                {
+                    transform.localScale = originalScale; // 恢复到原始大小
+                    jumpForce /= 0.5f; // 恢复跳跃力
                 }
             }
         }
