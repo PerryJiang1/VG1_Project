@@ -30,7 +30,7 @@ public class Mirror : MonoBehaviour
         {
             if (mirrorRenderer != null)
             {
-                mirrorRenderer.material.color = Color.blue;
+                mirrorRenderer.material.color = Color.green;
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))

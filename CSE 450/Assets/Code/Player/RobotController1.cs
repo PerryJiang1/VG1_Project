@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace CharacterMovement
 {
-    public class RobotController : MonoBehaviour
+    public class RobotController1 : MonoBehaviour
     {
         Rigidbody2D rb;
 
@@ -79,7 +79,6 @@ namespace CharacterMovement
 
         public void MoveRight(InputAction.CallbackContext value)
         {
-            Debug.Log("Press D");
             if (!isControlEnabled) return;
 
             if (value.started)
@@ -130,32 +129,32 @@ namespace CharacterMovement
             }
         }
 
-        //private void Update()
-        //{
-        //    if (isControlEnabled)
-        //    {
-        //        if (Keyboard.current.bKey.wasPressedThisFrame && transform.localScale == originalScale) // MODIFIED: 限制只允许从原始大小变大
-        //        {
-        //            transform.localScale = originalScale * 2; // 变大一倍
-        //            jumpForce *= 2; // 提高跳跃力
-        //        }
-        //        else if (Keyboard.current.nKey.wasPressedThisFrame && transform.localScale == originalScale * 2) // MODIFIED: 限制只允许从变大状态恢复
-        //        {
-        //            transform.localScale = originalScale; // 恢复到原始大小
-        //            jumpForce /= 2; // 恢复跳跃力
-        //        }
-        //        else if (Keyboard.current.nKey.wasPressedThisFrame && transform.localScale == originalScale) // MODIFIED: 限制只允许从原始大小变小
-        //        {
-        //            transform.localScale = originalScale * 0.5f; // 缩小一倍
-        //            jumpForce *= 0.5f; // 降低跳跃力
-        //        }
-        //        else if (Keyboard.current.bKey.wasPressedThisFrame && transform.localScale == originalScale * 0.5f) // MODIFIED: 限制只允许从变小状态恢复
-        //        {
-        //            transform.localScale = originalScale; // 恢复到原始大小
-        //            jumpForce /= 0.5f; // 恢复跳跃力
-        //        }
-        //    }
-        //}
+        private void Update()
+        {
+            if (isControlEnabled)
+            {
+                if (Keyboard.current.bKey.wasPressedThisFrame && transform.localScale == originalScale) // MODIFIED: 限制只允许从原始大小变大
+                {
+                    transform.localScale = originalScale * 2; // 变大一倍
+                    jumpForce *= 2; // 提高跳跃力
+                }
+                else if (Keyboard.current.nKey.wasPressedThisFrame && transform.localScale == originalScale * 2) // MODIFIED: 限制只允许从变大状态恢复
+                {
+                    transform.localScale = originalScale; // 恢复到原始大小
+                    jumpForce /= 2; // 恢复跳跃力
+                }
+                else if (Keyboard.current.nKey.wasPressedThisFrame && transform.localScale == originalScale) // MODIFIED: 限制只允许从原始大小变小
+                {
+                    transform.localScale = originalScale * 0.5f; // 缩小一倍
+                    jumpForce *= 0.5f; // 降低跳跃力
+                }
+                else if (Keyboard.current.bKey.wasPressedThisFrame && transform.localScale == originalScale * 0.5f) // MODIFIED: 限制只允许从变小状态恢复
+                {
+                    transform.localScale = originalScale; // 恢复到原始大小
+                    jumpForce /= 0.5f; // 恢复跳跃力
+                }
+            }
+        }
 
         // Disable the player's controls after the level is complete
         public void DisableControl()

@@ -10,6 +10,7 @@ public class Panel : MonoBehaviour
     public AnimationCurve showCurve;
     public float animationSpeed;
     public string mainMenuScene;
+    public string collectionScene;
     public string exitScene;
     public CharacterMovement.RobotController robotController;
 
@@ -95,7 +96,12 @@ public class Panel : MonoBehaviour
         SceneManager.LoadScene(mainMenuScene); 
     }
 
-    
+    public void GoToCollection()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(collectionScene);
+    }
+
     public void ResumeGame()
     {
         StopAllCoroutines();
