@@ -285,8 +285,8 @@ Transform:
   m_GameObject: {fileID: 219779836}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.000096061056, w: 1}
-  m_LocalPosition: {x: 0.1006, y: -0.0043, z: 0}
-  m_LocalScale: {x: 1.1248693, y: 1.1496408, z: 1}
+  m_LocalPosition: {x: 0.1007, y: -0.0152, z: 0}
+  m_LocalScale: {x: 1.1226492, y: 1.1472214, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -348,16 +348,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Don\u2019t worry about the dangers ahead\u2014I\u2019ll always be here
-    to help you. The portal remains inactive in the absence of light and only activates
-    when illuminated. When you approach a mirror, it will glow blue, indicating that
-    you can use the arrow keys to rotate the mirror and control the direction of
-    the reflected light. The goal in this area is marked by a red flag; reaching
-    it will complete the level and allow you to move on to the next. Stay determined,
-    and make your way to the ground, where sunlight and freedom await your embrace.\n"
+  m_text: "In this level, you\u2019ll encounter areas that are hard to pass through
+    or platforms that are difficult to reach. When that happens, you can use the
+    B and N keys to grow larger or shrink smaller, altering your size and gaining
+    strength proportional to your form. Experiment with switching body sizes to clear
+    the level!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c820da06f1a18ef4fb021e4368dfed27, type: 2}
+  m_sharedMaterial: {fileID: 2210687676423477499, guid: c820da06f1a18ef4fb021e4368dfed27, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

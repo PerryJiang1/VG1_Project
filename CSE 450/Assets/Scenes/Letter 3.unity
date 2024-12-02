@@ -349,9 +349,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Here, you'll see red buttons. When light shines on them, they will activate,
-    causing the wooden planks to move. Also, notice that there might be some mirrors
-    not turning green when you get close to them, try if there're any other ways
-    to interact with them. Use them wisely to make your escape!
+    causing the wooden planks to move. Use them wisely to make your escape!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c820da06f1a18ef4fb021e4368dfed27, type: 2}
   m_sharedMaterial: {fileID: 2210687676423477499, guid: c820da06f1a18ef4fb021e4368dfed27, type: 2}
