@@ -41,5 +41,20 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Collection.unity
     guid: dbf6690b9b2722b41b983d57aa89dfad
+  - enabled: 1
+    path: Assets/Scenes/Letter 1.unity
+    guid: 5fbad3dd5cbefc9408344bec33c0be2c
+  - enabled: 1
+    path: Assets/Scenes/Letter 2.unity
+    guid: d3883213aa241e8418d85e0838e0472b
+  - enabled: 1
+    path: Assets/Scenes/Letter 3.unity
+    guid: 4e6d734070f1a8c458887202e63affb3
+  - enabled: 1
+    path: Assets/Scenes/Letter 4.unity
+    guid: 69fbcc4c8669e0245aa7f19c220c46ab
+  - enabled: 1
+    path: Assets/Scenes/Letter 5.unity
+    guid: 5bc9136bf345f3d43b3886d80999858b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: cfb4783c503b40f4193293ecbcb03efc, type: 2}

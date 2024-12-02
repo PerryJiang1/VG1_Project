@@ -7,7 +7,7 @@ public class SceneSwitcher : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("UI"); 
+            SceneManager.LoadScene("Collection"); 
         }
     }
 }
