@@ -23,7 +23,7 @@ TagManager:
   - ActButton
   - FloatingPlatform
   - MirrorCube
-  - 
+  - Letter Text
   - 
   - 
   - 
@@ -54,4 +54,7 @@ TagManager:
     locked: 0
   - name: Game Componenets
     uniqueID: 578283585
+    locked: 0
+  - name: Letter Text
+    uniqueID: 1190769353
     locked: 0
